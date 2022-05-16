@@ -147,76 +147,76 @@ def barkPush(body):
         print('bark push Done! Body:', body)
     elif barkKey == 0:
         print('No barkKey, Body is:', body)
+if __name__ == '__main__':
+    try:
+        # create chrome driver
+        Options = uc.ChromeOptions()
+        #Options.add_argument('--headless')
+        Options.add_argument('--no-sandbox')
+        Options.add_argument('--disable-gpu')
+        Options.add_argument('--disable-dev-shm-usage')
+        driver = uc.Chrome(options=Options)
+        delay()
+        # go to website which have recaptcha protection
+        driver.get(urlLogin)
+    except Exception as e:
+        print(e)
+       
+       # sys.exit(
+       #     "[-] Please update the chromedriver in the webdriver folder according to your chrome version:https://chromedriver.chromium.org/downloads")
 
-try:
-    # create chrome driver
-    Options = uc.ChromeOptions()
-    #Options.add_argument('--headless')
-    Options.add_argument('--no-sandbox')
-    Options.add_argument('--disable-gpu')
-    Options.add_argument('--disable-dev-shm-usage')
-    driver = uc.Chrome(options=Options)
+    # main
+    try:
+        driver.execute_script(r'document.querySelector("body > div.fc-consent-root > div.fc-dialog-container > div.fc-dialog.fc-choice-dialog > div.fc-footer-buttons-container > div.fc-footer-buttons > button.fc-button.fc-cta-consent.fc-primary-button").click()')
+    except Exception as e:
+        print(e)
+        pass
+    time.sleep(10)
+    print('fill username')
+    driver.find_element(By.XPATH, '//*[@id="text"]').send_keys(USERNAME)
+    print('fill password')
+    driver.find_element(By.XPATH, '//*[@id="password"]').send_keys(PASSWORD)
     delay()
-    # go to website which have recaptcha protection
-    driver.get(urlLogin)
-except Exception as e:
-    print(e)
-    driver.quit()
-   # sys.exit(
-   #     "[-] Please update the chromedriver in the webdriver folder according to your chrome version:https://chromedriver.chromium.org/downloads")
-
-# main
-try:
-    driver.execute_script(r'document.querySelector("body > div.fc-consent-root > div.fc-dialog-container > div.fc-dialog.fc-choice-dialog > div.fc-footer-buttons-container > div.fc-footer-buttons > button.fc-button.fc-cta-consent.fc-primary-button").click()')
-except Exception as e:
-    print(e)
-    pass
-time.sleep(10)
-print('fill username')
-driver.find_element(By.XPATH, '//*[@id="text"]').send_keys(USERNAME)
-print('fill password')
-driver.find_element(By.XPATH, '//*[@id="password"]').send_keys(PASSWORD)
-delay()
-# reCAPTCHA
-print('do reCAPTCHA')
-reCAPTCHA()
-time.sleep(10)
-# login
-driver.switch_to.default_content()
-print('click login')
-driver.find_element(By.NAME, 'login').click()
-time.sleep(10)
-# Extend VPS link
-print('click Extend VPS')
-driver.get('https://hax.co.id/vps-renew/')
-time.sleep(10)
-# input web address
-print('fill web address')
-driver.find_element(By.XPATH, '//*[@id="web_address"]').send_keys('hax.co.id')
-# captcha
-print('do CAPTCHA')
-driver.find_element(By.XPATH,'//*[@id="captcha"]').send_keys(CAPTCHA())
-# agreement check
-print('click agreement')
-driver.find_element(By.NAME, 'agreement').click()
-# reCAPTCHA again
-print('do reCAPTCHA')
-try:
+    # reCAPTCHA
+    print('do reCAPTCHA')
     reCAPTCHA()
-except Exception as e:
-     print(e)
-     pass
-time.sleep(10)
-driver.switch_to.default_content()
-# submit_button (Renew VPS)
-print('click Renew VPS')
-driver.find_element(By.NAME, 'submit_button').click()
-time.sleep(15)
-print('copy text')
-body = WebDriverWait(driver, 30).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="response"]/div'))).text
-# print('textBody:', body)
-delay()
-print('bark push')
-barkPush(body)
-delay()
-driver.quit()
+    time.sleep(10)
+    # login
+    driver.switch_to.default_content()
+    print('click login')
+    driver.find_element(By.NAME, 'login').click()
+    time.sleep(10)
+    # Extend VPS link
+    print('click Extend VPS')
+    driver.get('https://hax.co.id/vps-renew/')
+    time.sleep(10)
+    # input web address
+    print('fill web address')
+    driver.find_element(By.XPATH, '//*[@id="web_address"]').send_keys('hax.co.id')
+    # captcha
+    print('do CAPTCHA')
+    driver.find_element(By.XPATH,'//*[@id="captcha"]').send_keys(CAPTCHA())
+    # agreement check
+    print('click agreement')
+    driver.find_element(By.NAME, 'agreement').click()
+    # reCAPTCHA again
+    print('do reCAPTCHA')
+    try:
+        reCAPTCHA()
+    except Exception as e:
+         print(e)
+         pass
+    time.sleep(10)
+    driver.switch_to.default_content()
+    # submit_button (Renew VPS)
+    print('click Renew VPS')
+    driver.find_element(By.NAME, 'submit_button').click()
+    time.sleep(15)
+    print('copy text')
+    body = WebDriverWait(driver, 30).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="response"]/div'))).text
+    # print('textBody:', body)
+    delay()
+    print('bark push')
+    barkPush(body)
+    delay()
+    driver.quit()
