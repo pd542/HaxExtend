@@ -163,6 +163,11 @@ except Exception as e:
         "[-] Please update the chromedriver in the webdriver folder according to your chrome version:https://chromedriver.chromium.org/downloads")
 
 # main
+try:
+    driver.execute_script(r'document.querySelector("body > div.fc-consent-root > div.fc-dialog-container > div.fc-dialog.fc-choice-dialog > div.fc-footer-buttons-container > div.fc-footer-buttons > button.fc-button.fc-cta-consent.fc-primary-button").click()')
+except Exception as e:
+    print(e)
+    pass
 time.sleep(10)
 print('fill username')
 driver.find_element(By.XPATH, '//*[@id="text"]').send_keys(USERNAME)
@@ -193,7 +198,11 @@ print('click agreement')
 driver.find_element(By.NAME, 'agreement').click()
 # reCAPTCHA again
 print('do reCAPTCHA')
-reCAPTCHA()
+try:
+    reCAPTCHA()
+except Exception as e:
+     print(e)
+     pass
 time.sleep(10)
 driver.switch_to.default_content()
 # submit_button (Renew VPS)
