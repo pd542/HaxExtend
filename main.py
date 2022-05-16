@@ -9,6 +9,7 @@ import random
 import urllib
 import requests
 
+import undetected_chromedriver.v2 as uc
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
@@ -149,12 +150,12 @@ def barkPush(body):
 
 try:
     # create chrome driver
-    Options = webdriver.ChromeOptions()
+    Options = uc.ChromeOptions()
     #Options.add_argument('--headless')
     Options.add_argument('--no-sandbox')
     Options.add_argument('--disable-gpu')
     Options.add_argument('--disable-dev-shm-usage')
-    driver = webdriver.Chrome(options=Options)
+    driver = uc.Chrome(options=Options)
     delay()
     # go to website which have recaptcha protection
     driver.get(urlLogin)
