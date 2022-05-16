@@ -160,6 +160,7 @@ try:
     # go to website which have recaptcha protection
     driver.get(urlLogin)
 except Exception as e:
+    print(e)
     sys.exit(
         "[-] Please update the chromedriver in the webdriver folder according to your chrome version:https://chromedriver.chromium.org/downloads")
 
