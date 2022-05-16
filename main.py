@@ -150,7 +150,7 @@ def barkPush(body):
 try:
     # create chrome driver
     Options = webdriver.ChromeOptions()
-    Options.add_argument('--headless')
+    #Options.add_argument('--headless')
     Options.add_argument('--no-sandbox')
     Options.add_argument('--disable-gpu')
     Options.add_argument('--disable-dev-shm-usage')
