@@ -161,8 +161,9 @@ try:
     driver.get(urlLogin)
 except Exception as e:
     print(e)
-    sys.exit(
-        "[-] Please update the chromedriver in the webdriver folder according to your chrome version:https://chromedriver.chromium.org/downloads")
+    driver.quit()
+   # sys.exit(
+   #     "[-] Please update the chromedriver in the webdriver folder according to your chrome version:https://chromedriver.chromium.org/downloads")
 
 # main
 try:
