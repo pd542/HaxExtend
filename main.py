@@ -185,7 +185,7 @@ driver.find_element(By.NAME, 'login').click()
 time.sleep(10)
 # Extend VPS link
 print('click Extend VPS')
-WebDriverWait(driver, 60).until(EC.visibility_of_element_located((By.LINK_TEXT, 'Extend VPS Expiration'))).click()
+driver.get('https://hax.co.id/vps-renew/')
 time.sleep(10)
 # input web address
 print('fill web address')
